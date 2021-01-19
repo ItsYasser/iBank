@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_expenses_2/home_navigator.dart';
 import 'package:personal_expenses_2/screens/AddTransaction_screen.dart';
 import 'package:personal_expenses_2/screens/History/history_screen.dart';
 import 'package:personal_expenses_2/screens/home/home_screen.dart';
@@ -19,9 +20,9 @@ class MyApp extends StatelessWidget {
 
       debugShowCheckedModeBanner: false,
       title: 'Personal Expenses',
-      home: HomeScreen(),
+      home: HomeBody(),
       routes: {
-        HomeScreen.routeName: (ctx) => HomeScreen(),
+        Home.routeName: (ctx) => Home(),
       },
     );
   }

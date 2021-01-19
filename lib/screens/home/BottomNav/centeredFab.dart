@@ -22,7 +22,7 @@ class FAB extends StatelessWidget {
                 pageBuilder: (c, a1, a2) => AddTransaction(addTransaction),
                 transitionsBuilder: (c, anim, a2, child) =>
                     FadeTransition(opacity: anim, child: child),
-                transitionDuration: Duration(milliseconds: 200),
+                transitionDuration: Duration(milliseconds: 500),
               ),
             );
           },

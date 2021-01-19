@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:personal_expenses_2/bars/app_bar.dart';
 import 'package:personal_expenses_2/models/Transactions.dart';
-import 'package:personal_expenses_2/screens/home/BottomNav/BottomNavBar.dart';
 import 'package:personal_expenses_2/screens/home/BottomNav/centeredFab.dart';
-import 'package:personal_expenses_2/screens/home/First_Half/LastT_SeeAll.dart';
 import 'package:personal_expenses_2/screens/home/Second_Half/T_Cards.dart';
 import 'package:personal_expenses_2/screens/home/components/custom_clipper3.dart';
 import 'package:personal_expenses_2/screens/home/home_screen.dart';
@@ -10,44 +9,37 @@ import 'package:responsive_flutter/responsive_flutter.dart';
 
 import 'DateCard.dart';
 
-class HistoryScreen extends StatefulWidget {
-  List<Transaction> myListOfTransactions;
-  HistoryScreen({this.myListOfTransactions});
+class History extends StatefulWidget {
+  final List<Transaction> myListOfTransactions;
+  final double realHeight;
+  final double realWidth;
+  History({this.myListOfTransactions, this.realHeight, this.realWidth});
 
   @override
-  _HistoryScreenState createState() => _HistoryScreenState();
+  _HistoryState createState() => _HistoryState();
 }
 
-class _HistoryScreenState extends State<HistoryScreen> {
+class _HistoryState extends State<History> {
+  int _index;
+  List<Transaction> _newList = [];
   @override
   void initState() {
     super.initState();
     showListofTransactions(DateTime.now());
+    _index = DateTime.now().day;
   }
 
-  List<Transaction> newList = [];
   void showListofTransactions(DateTime date) {
-    newList.clear();
+    _newList.clear();
     for (Transaction tx in widget.myListOfTransactions) {
       if (tx.date.day == date.day) {
-        newList.add(tx);
+        _newList.add(tx);
       }
     }
-    _index = date.day;
-    setState(() {});
+    setState(() {
+      _index = date.day;
+    });
   }
-
-  int _index = DateTime.now().day;
-  // void updateColor(int index) {
-
-  // }
-  // void printa(DateTime date) {
-  //   print("works ?");
-  //   print(date.day);
-  //   print("works ?");
-  //   print("works ?");
-  //   print("works ?");
-  // }
 
   List<DateCard> showListofDates() {
     List<DateCard> newList = [];
@@ -64,18 +56,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final realHeight = MediaQuery.of(context).size.height -
-        buildAppBar(context).preferredSize.height -
-        MediaQuery.of(context).padding.top;
-    final realWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      extendBodyBehindAppBar: false,
+      // extendBody: true,
       backgroundColor: Colors.white,
       appBar: buildAppBar(context),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(left: realWidth * 0.045),
+            padding: EdgeInsets.only(
+                left: widget.realWidth * 0.045, top: widget.realWidth * 0.045),
             child: Text(
               'Date',
               style: TextStyle(
@@ -85,10 +76,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
           ),
           SizedBox(
-            height: realHeight * 0.03,
+            height: widget.realHeight * 0.03,
           ),
           Container(
-            height: realHeight * 0.17,
+            height: widget.realHeight * 0.17,
             child: ListView.builder(
                 itemCount: showListofDates().length,
                 scrollDirection: Axis.horizontal,
@@ -98,10 +89,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 }),
           ),
           SizedBox(
-            height: realHeight * 0.05,
+            height: widget.realHeight * 0.05,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: realWidth * 0.045),
+            padding: EdgeInsets.symmetric(horizontal: widget.realWidth * 0.045),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -126,131 +117,26 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
           ),
           SizedBox(
-            height: realHeight * 0.02,
+            height: widget.realHeight * 0.02,
           ),
           TransactionCards(
-            realHeight: realHeight,
-            transactions: newList,
+            realHeight: widget.realHeight,
+            transactions: _newList,
           ),
         ],
       ),
-      bottomNavigationBar: Padding(
-        // padding: EdgeInsets.only(bottom: realWidth * 0.03),
-        padding: EdgeInsets.only(bottom: 0),
-        child: ClipPath(
-          clipper: MyCustomClipper3(radius: realWidth * 0.06),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: realWidth * 0.07, vertical: realHeight * 0.01),
-            child: Container(
-              height: realHeight * 0.085,
-              width: double.infinity,
-              // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 1,
-                    blurRadius: 4,
-                    offset: Offset(0, 1),
-                  ),
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 2,
-                    offset: Offset(0, 5),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.home,
-                    ),
-                    onPressed: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (ctx) {
-                        return HomeScreen();
-                      }));
-                    },
-                    color: Colors.grey,
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    iconSize: ResponsiveFlutter.of(context).fontSize(3.1),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.settings_backup_restore,
-                    ),
-                    onPressed: () {},
-                    color: Color(0xff8A1AE6),
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    iconSize: ResponsiveFlutter.of(context).fontSize(3.1),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.bar_chart,
-                    ),
-                    onPressed: () {},
-                    color: Colors.grey,
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    iconSize: ResponsiveFlutter.of(context).fontSize(3.1),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.supervised_user_circle,
-                    ),
-                    onPressed: () {},
-                    color: Colors.grey,
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    iconSize: ResponsiveFlutter.of(context).fontSize(3.1),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-      floatingActionButton: FAB(null),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
-  List lista = [
-    DateCard(),
-    DateCard(),
-    DateCard(),
-    DateCard(),
-    DateCard(),
-  ];
-
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      leading: BackButton(color: Colors.black),
       title: Text(
         'History',
         style: TextStyle(color: Colors.black),
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Icon(
-            Icons.more_vert,
-            color: Colors.black,
-            size: ResponsiveFlutter.of(context).fontSize(3),
-          ),
-        ),
-      ],
       centerTitle: true,
       backgroundColor: Colors.white,
-      elevation: 0,
+      elevation: 6,
     );
   }
 }
