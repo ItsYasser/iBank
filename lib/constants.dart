@@ -10,77 +10,87 @@ Color kTwoCurvesColor = Color(0xff8A1AE6);
 Color kDateCardColor = Color(0xffAA2AE2);
 List<Transaction> kAllTransactions = [
   Transaction(
-      amount: 60.01,
-      color: Colors.pink,
+      amount: 60.02,
       date: DateTime.now(),
-      title: 'New Shoes'),
+      title: 'New Shoes',
+      category: {
+        'name': 'Entertainement',
+        'color': Colors.blue,
+      }),
   Transaction(
       amount: 60.02,
-      color: Colors.pink,
       date: DateTime.now(),
-      title: 'New Shoes'),
+      title: 'New Shoes',
+      category: {
+        'name': 'Other',
+        'color': Colors.amber,
+      }),
   Transaction(
       amount: 60.03,
-      color: Colors.pink,
       date: DateTime.now(),
-      title: 'New Shoes'),
+      title: 'New Shoes',
+      category: {
+        'name': 'Social & Lifestyle',
+        'color': Colors.purple,
+      }),
   Transaction(
       amount: 60.02,
-      color: Colors.pink,
       date: DateTime.now(),
-      title: 'New Shoes'),
-  Transaction(
-      amount: 60.03,
-      color: Colors.pink,
-      date: DateTime.now(),
-      title: 'New Shoes'),
+      title: 'New Shoes',
+      category: {
+        'name': 'Beauty & Health',
+        'color': Colors.red,
+      }),
   Transaction(
       amount: 60.02,
-      color: Colors.pink,
       date: DateTime.now(),
-      title: 'New Shoes'),
+      title: 'New Shoes',
+      category: {
+        'name': 'Beauty & Health',
+        'color': Colors.red,
+      }),
   Transaction(
       amount: 60.03,
-      color: Colors.pink,
       date: DateTime.now(),
-      title: 'New Shoes'),
-  Transaction(
-      amount: 60.02,
-      color: Colors.pink,
-      date: DateTime.now(),
-      title: 'New Shoes'),
+      title: 'New Shoes',
+      category: {
+        'name': 'Entertainement',
+        'color': Colors.blue,
+      }),
   Transaction(
       amount: 60.03,
-      color: Colors.pink,
       date: DateTime.now(),
-      title: 'New Shoes'),
+      title: 'New Shoes',
+      category: {
+        'name': 'Entertainement',
+        'color': Colors.blue,
+      }),
 ];
 List<Transaction> kTransaction = [
   Transaction(
-      amount: 60.01,
-      color: Colors.pink,
+      amount: 60.02,
       date: DateTime.now(),
-      title: 'New Shoes'),
+      title: 'New Shoes',
+      category: {
+        'name': 'Entertainement',
+        'color': Colors.blue,
+      }),
   Transaction(
-      amount: 60.01,
-      color: Colors.pink,
+      amount: 60.03,
       date: DateTime.now(),
-      title: 'New Shoes'),
+      title: 'New Shoes',
+      category: {
+        'name': 'Social & Lifestyle',
+        'color': Colors.purple,
+      }),
   Transaction(
-      amount: 60.05,
-      color: Colors.pink,
+      amount: 60.02,
       date: DateTime.now(),
-      title: 'New Shoes'),
-  // Transaction(
-  //     amount: 60.02,
-  //     color: Colors.pink,
-  //     date: DateTime.now(),
-  //     title: 'New Shoes'),
-  // Transaction(
-  //     amount: 60.03,
-  //     color: Colors.pink,
-  //     date: DateTime.now(),
-  //     title: 'New Shoes'),
+      title: 'New Shoes',
+      category: {
+        'name': 'Beauty & Health',
+        'color': Colors.red,
+      }),
 ];
 int kNumDays = 5;
 MaterialColor kSwatchColor = MaterialColor(0xff5C01D0, color);

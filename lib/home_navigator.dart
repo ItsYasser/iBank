@@ -37,12 +37,12 @@ class _HomeBodyState extends State<HomeBody>
   double _incomeValue = 8500000;
 
   void _addNewTransaction(
-      {String title, double amount, DateTime dateTime, Color color}) {
+      {String title, double amount, DateTime dateTime, Map category}) {
     final newTx = Transaction(
         title: title,
         amount: amount,
         date: dateTime,
-        color: color,
+        category: category,
         id: DateTime.now().toString());
     setState(() {
       if (_transactions.length >= 3) {
@@ -70,7 +70,9 @@ class _HomeBodyState extends State<HomeBody>
       extendBody: true,
       body: TabBarView(
         children: [
-          Chart(),
+          Chart(
+            listOfTransactions: _alltransactions,
+          ),
           Home(
             allTransactions: _alltransactions,
             expensesValue: _expensesValue,

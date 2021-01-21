@@ -5,7 +5,6 @@ class Transaction {
   final String title;
   final double amount;
   final DateTime date;
-  final Color color;
-
-  Transaction({this.id, this.title, this.amount, this.date, this.color});
+  final Map category;
+  Transaction({this.id, this.title, this.amount, this.date, this.category});
 }

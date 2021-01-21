@@ -106,7 +106,7 @@ class Home extends StatelessWidget {
                       date: tx.date,
                       id: tx.id,
                       title: tx.title,
-                      color: tx.color,
+                      color: tx.category['color'],
                     );
                   }).toList(),
                 ),

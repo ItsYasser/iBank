@@ -135,7 +135,7 @@ class _HistoryState extends State<History> {
                       date: tx.date,
                       id: tx.id,
                       title: tx.title,
-                      color: tx.color,
+                      color: tx.category['color'],
                     );
                   }).toList(),
                 ),

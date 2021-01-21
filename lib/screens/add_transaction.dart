@@ -162,7 +162,7 @@ class _AddTransactionState extends State<AddTransaction> {
             title: _titleValue,
             amount: _amountValue,
             dateTime: _selectedDate,
-            color: _categoryColor);
+            category: {'name': _category, 'color': _categoryColor});
         widget.tabController.animateTo(0);
         Navigator.pop(context);
       },
