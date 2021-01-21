@@ -1,19 +1,123 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_flutter/responsive_flutter.dart';
 
-const goldColor = Color.fromARGB(255, 243, 206, 65);
-const mellowGold = Color.fromARGB(255, 254, 236, 134);
-const royalBlue = Color.fromARGB(255, 33, 50, 251);
-const limeGreen = Color.fromARGB(255, 33, 251, 64);
-const teal = Color.fromARGB(255, 56, 232, 205);
-const hardYellow = Color.fromARGB(255, 239, 251, 33);
-const brightPink = Color.fromARGB(255, 235, 33, 251);
-const wildPink = Color.fromARGB(255, 254, 0, 174);
-const lightPink = Color.fromARGB(255, 217, 196, 220);
-const lightPinkOne = Color.fromARGB(255, 241, 191, 244);
-const lightPinkTwo = Color.fromARGB(255, 251, 175, 252);
-const lightPinkThree = Color.fromARGB(255, 252, 175, 228);
-const almostBlue = Color.fromARGB(255, 103, 33, 251);
-const definitelyPurple = Color.fromARGB(255, 144, 33, 251);
-const backgroundSlate = Color.fromARGB(255, 47, 46, 58);
-const backgroundSlateOne = Color.fromARGB(255, 54, 55, 74);
-const backgroundSlateTwo = Color.fromARGB(255, 57, 58, 96);
+import 'models/Transactions.dart';
+
+Color kPrimaryColor = Color(0xff5C01D0);
+Color kAccentColor = Color(0xff5C01D0);
+Color kOneCurveColor = Color(0xffAA2AE2);
+Color kTwoCurvesColor = Color(0xff8A1AE6);
+Color kDateCardColor = Color(0xffAA2AE2);
+List<Transaction> kAllTransactions = [
+  Transaction(
+      amount: 60.01,
+      color: Colors.pink,
+      date: DateTime.now(),
+      title: 'New Shoes'),
+  Transaction(
+      amount: 60.02,
+      color: Colors.pink,
+      date: DateTime.now(),
+      title: 'New Shoes'),
+  Transaction(
+      amount: 60.03,
+      color: Colors.pink,
+      date: DateTime.now(),
+      title: 'New Shoes'),
+  Transaction(
+      amount: 60.02,
+      color: Colors.pink,
+      date: DateTime.now(),
+      title: 'New Shoes'),
+  Transaction(
+      amount: 60.03,
+      color: Colors.pink,
+      date: DateTime.now(),
+      title: 'New Shoes'),
+  Transaction(
+      amount: 60.02,
+      color: Colors.pink,
+      date: DateTime.now(),
+      title: 'New Shoes'),
+  Transaction(
+      amount: 60.03,
+      color: Colors.pink,
+      date: DateTime.now(),
+      title: 'New Shoes'),
+  Transaction(
+      amount: 60.02,
+      color: Colors.pink,
+      date: DateTime.now(),
+      title: 'New Shoes'),
+  Transaction(
+      amount: 60.03,
+      color: Colors.pink,
+      date: DateTime.now(),
+      title: 'New Shoes'),
+];
+List<Transaction> kTransaction = [
+  Transaction(
+      amount: 60.01,
+      color: Colors.pink,
+      date: DateTime.now(),
+      title: 'New Shoes'),
+  Transaction(
+      amount: 60.01,
+      color: Colors.pink,
+      date: DateTime.now(),
+      title: 'New Shoes'),
+  Transaction(
+      amount: 60.05,
+      color: Colors.pink,
+      date: DateTime.now(),
+      title: 'New Shoes'),
+  // Transaction(
+  //     amount: 60.02,
+  //     color: Colors.pink,
+  //     date: DateTime.now(),
+  //     title: 'New Shoes'),
+  // Transaction(
+  //     amount: 60.03,
+  //     color: Colors.pink,
+  //     date: DateTime.now(),
+  //     title: 'New Shoes'),
+];
+int kNumDays = 5;
+MaterialColor kSwatchColor = MaterialColor(0xff5C01D0, color);
+Map<int, Color> color = {
+  50: Color.fromRGBO(4, 131, 184, .1),
+  100: Color.fromRGBO(4, 131, 184, .2),
+  200: Color.fromRGBO(4, 131, 184, .3),
+  300: Color.fromRGBO(4, 131, 184, .4),
+  400: Color.fromRGBO(4, 131, 184, .5),
+  500: Color.fromRGBO(4, 131, 184, .6),
+  600: Color.fromRGBO(4, 131, 184, .7),
+  700: Color.fromRGBO(4, 131, 184, .8),
+  800: Color.fromRGBO(4, 131, 184, .9),
+  900: Color.fromRGBO(4, 131, 184, 1),
+};
+
+InputDecoration kTextFieldDecoration = InputDecoration(
+  contentPadding: EdgeInsets.fromLTRB(30, 19, 20, 19),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      color: Colors.grey[400].withOpacity(0.8),
+    ),
+    borderRadius: BorderRadius.circular(18),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(18)),
+    borderSide: BorderSide(
+      width: 1.5,
+      color: kPrimaryColor,
+    ),
+  ),
+  hintText: '\$50',
+  fillColor: Colors.grey[200].withOpacity(0.4),
+  filled: true,
+);
+
+TextStyle kTextFieldTextStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.w500,
+);

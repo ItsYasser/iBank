@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses_2/screens/home/components/custom_clipper3.dart';
+import 'package:personal_expenses_2/components/BNB_clipper.dart';
 
 class BottomNavBarFinal extends StatelessWidget {
-  final realWidth;
-  final realHeight;
   final TabController tabController;
 
-  const BottomNavBarFinal(
-      {this.realWidth, this.realHeight, this.tabController});
+  const BottomNavBarFinal({this.tabController});
 
   @override
   Widget build(BuildContext context) {
+    final realHeight = MediaQuery.of(context).size.height -
+        MediaQuery.of(context).padding.top -
+        56;
+    final realWidth = MediaQuery.of(context).size.width;
     return ClipPath(
       clipper: MyCustomClipper3(radius: realWidth * 0.06),
       child: Padding(
@@ -43,7 +44,7 @@ class BottomNavBarFinal extends StatelessWidget {
             ],
           ),
           child: TabBar(
-            labelColor: Colors.deepPurple,
+            labelColor: Theme.of(context).primaryColor,
             unselectedLabelColor: Colors.grey,
             indicatorColor: Colors.transparent,
             tabs: tabs(),

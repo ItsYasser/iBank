@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses_2/screens/home/components/one_curveClipper.dart';
-import 'package:personal_expenses_2/screens/home/components/two_curvesClipper.dart';
+import 'package:personal_expenses_2/constants.dart';
+import 'package:personal_expenses_2/components/one_curveClipper.dart';
+import 'package:personal_expenses_2/components/two_curvesClipper.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
 
-import 'colum_info.dart';
+import 'ballance_info.dart';
 
+// ignore: must_be_immutable
 class TopHalf extends StatelessWidget {
   final double income;
   final double expenses;
@@ -24,10 +26,7 @@ class TopHalf extends StatelessWidget {
           right: 0,
           child: ClipPath(
             clipper: OneCurve(),
-            child: Container(
-              height: size.height * 0.34,
-              color: Color(0xffAA2AE2),
-            ),
+            child: Container(height: size.height * 0.34, color: kOneCurveColor),
           ),
         ),
         Positioned(
@@ -38,7 +37,7 @@ class TopHalf extends StatelessWidget {
             clipper: TwoCurves(),
             child: Container(
               height: size.height * 0.15,
-              color: Color(0xff8A1AE6),
+              color: kTwoCurvesColor,
             ),
           ),
         ),

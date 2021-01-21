@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses_2/models/Transactions.dart';
-import 'package:personal_expenses_2/screens/home/Second_Half/transaction_card.dart';
+import 'package:personal_expenses_2/widgets/transaction_card.dart';
 
 class AllTransactions extends StatelessWidget {
   final List<Transaction> listOfTransactions;

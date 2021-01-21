@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses_2/bars/app_bar.dart';
+import 'package:personal_expenses_2/constants.dart';
 import 'package:personal_expenses_2/models/Transactions.dart';
-import 'package:personal_expenses_2/screens/home/BottomNav/centeredFab.dart';
-import 'package:personal_expenses_2/screens/home/Second_Half/T_Cards.dart';
-import 'package:personal_expenses_2/screens/home/components/custom_clipper3.dart';
-import 'package:personal_expenses_2/screens/home/home_screen.dart';
+import 'package:personal_expenses_2/Widgets/transaction_card.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
 
-import 'DateCard.dart';
+import '../Widgets/DateCard.dart';
 
 class History extends StatefulWidget {
   final List<Transaction> myListOfTransactions;
-  final double realHeight;
-  final double realWidth;
-  History({this.myListOfTransactions, this.realHeight, this.realWidth});
+  History({this.myListOfTransactions});
 
   @override
   _HistoryState createState() => _HistoryState();
@@ -43,7 +38,7 @@ class _HistoryState extends State<History> {
 
   List<DateCard> showListofDates() {
     List<DateCard> newList = [];
-    for (int i = 0; i <= 4; i++) {
+    for (int i = 0; i <= kNumDays; i++) {
       DateTime date = DateTime.now().subtract(Duration(days: i));
       newList.add(DateCard(
         date: date,
@@ -56,9 +51,12 @@ class _HistoryState extends State<History> {
 
   @override
   Widget build(BuildContext context) {
+    final realHeight = MediaQuery.of(context).size.height -
+        buildAppBar(context).preferredSize.height -
+        MediaQuery.of(context).padding.top;
+    final realWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      extendBodyBehindAppBar: false,
-      // extendBody: true,
+      extendBody: true,
       backgroundColor: Colors.white,
       appBar: buildAppBar(context),
       body: Column(
@@ -66,7 +64,7 @@ class _HistoryState extends State<History> {
         children: [
           Padding(
             padding: EdgeInsets.only(
-                left: widget.realWidth * 0.045, top: widget.realWidth * 0.045),
+                left: realWidth * 0.045, top: realWidth * 0.045),
             child: Text(
               'Date',
               style: TextStyle(
@@ -76,10 +74,10 @@ class _HistoryState extends State<History> {
             ),
           ),
           SizedBox(
-            height: widget.realHeight * 0.03,
+            height: realHeight * 0.03,
           ),
           Container(
-            height: widget.realHeight * 0.17,
+            height: realHeight * 0.17,
             child: ListView.builder(
                 itemCount: showListofDates().length,
                 scrollDirection: Axis.horizontal,
@@ -89,10 +87,10 @@ class _HistoryState extends State<History> {
                 }),
           ),
           SizedBox(
-            height: widget.realHeight * 0.05,
+            height: realHeight * 0.05,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: widget.realWidth * 0.045),
+            padding: EdgeInsets.symmetric(horizontal: realWidth * 0.045),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -117,11 +115,32 @@ class _HistoryState extends State<History> {
             ),
           ),
           SizedBox(
-            height: widget.realHeight * 0.02,
+            height: realHeight * 0.02,
           ),
-          TransactionCards(
-            realHeight: widget.realHeight,
-            transactions: _newList,
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(top: realHeight * 0.01),
+              height: realHeight * 0.45,
+              padding: EdgeInsets.only(bottom: realHeight * 0.125),
+              width: double.infinity,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: _newList.length <= 2
+                      ? MainAxisAlignment.start
+                      : MainAxisAlignment.spaceEvenly,
+                  children: _newList.map((tx) {
+                    return TransactionCard(
+                      amount: tx.amount,
+                      date: tx.date,
+                      id: tx.id,
+                      title: tx.title,
+                      color: tx.color,
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
           ),
         ],
       ),

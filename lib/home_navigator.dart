@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses_2/bars/bottom_bar.dart';
-import 'package:personal_expenses_2/screens/Chart.dart';
-import 'package:personal_expenses_2/screens/History/history_screen.dart';
-import 'package:personal_expenses_2/screens/Profile.dart';
-import 'package:personal_expenses_2/screens/home/BottomNav/centeredFab.dart';
-import 'package:personal_expenses_2/screens/home/home_screen.dart';
+import 'package:personal_expenses_2/constants.dart';
+import 'package:personal_expenses_2/screens/chart.dart';
+import 'package:personal_expenses_2/screens/history.dart';
+import 'package:personal_expenses_2/screens/profile.dart';
+import 'package:personal_expenses_2/Widgets/centeredFab.dart';
+import 'package:personal_expenses_2/screens/home.dart';
 
-import 'bars/app_bar.dart';
 import 'models/Transactions.dart';
 
 class HomeBody extends StatefulWidget {
+  static const routeName = 'HomeBody';
   @override
   _HomeBodyState createState() => _HomeBodyState();
 }
@@ -30,40 +31,8 @@ class _HomeBodyState extends State<HomeBody>
     _tabController.dispose();
   }
 
-  List<Transaction> _transactions = [
-    // Transaction(
-    //     amount: 60.01,
-    //     color: Colors.pink,
-    //     date: DateTime.now(),
-    //     title: 'New Shoes'),
-    Transaction(
-        amount: 60.02,
-        color: Colors.pink,
-        date: DateTime.now(),
-        title: 'New Shoes'),
-    Transaction(
-        amount: 60.03,
-        color: Colors.pink,
-        date: DateTime.now(),
-        title: 'New Shoes'),
-  ];
-  List<Transaction> _alltransactions = [
-    Transaction(
-        amount: 60.01,
-        color: Colors.pink,
-        date: DateTime.now(),
-        title: 'New Shoes'),
-    Transaction(
-        amount: 60.02,
-        color: Colors.pink,
-        date: DateTime.now(),
-        title: 'New Shoes'),
-    Transaction(
-        amount: 60.03,
-        color: Colors.pink,
-        date: DateTime.now(),
-        title: 'New Shoes'),
-  ];
+  List<Transaction> _transactions = kTransaction;
+  List<Transaction> _alltransactions = kAllTransactions;
   double _expensesValue = 764000.6;
   double _incomeValue = 8500000;
 
@@ -87,46 +56,40 @@ class _HomeBodyState extends State<HomeBody>
     });
   }
 
+  void setIncome(double value) {
+    setState(() {
+      _incomeValue += value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final realHeight = MediaQuery.of(context).size.height -
-        buildAppBar(context).preferredSize.height -
-        MediaQuery.of(context).padding.top;
-    final realWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       extendBody: true,
-
-      // appBar: buildAppBar(context),
       body: TabBarView(
         children: [
+          Chart(),
           Home(
-            realHeight: realHeight,
-            realWidth: realWidth,
             allTransactions: _alltransactions,
             expensesValue: _expensesValue,
             incomeValue: _incomeValue,
             transactions: _transactions,
+            setIncome: setIncome,
           ),
           History(
             myListOfTransactions: _transactions,
-            realHeight: realHeight,
-            realWidth: realWidth,
           ),
-          Chart(),
           Profile(),
         ],
         physics: NeverScrollableScrollPhysics(),
         controller: _tabController,
       ),
       bottomNavigationBar: BottomNavBarFinal(
-        realHeight: realHeight,
-        realWidth: realWidth,
         tabController: _tabController,
       ),
-      floatingActionButton: FAB(_addNewTransaction),
+      floatingActionButton: FAB(_addNewTransaction, _tabController),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses_2/screens/AddTransaction_screen.dart';
+import 'package:personal_expenses_2/screens/add_transaction.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
 
 class FAB extends StatelessWidget {
   Function addTransaction;
-  FAB(this.addTransaction);
+  TabController tabController;
+  FAB(this.addTransaction, this.tabController);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -13,13 +14,14 @@ class FAB extends StatelessWidget {
       child: FittedBox(
         fit: BoxFit.scaleDown,
         child: FloatingActionButton(
-          backgroundColor: Color(0xff8A1AE6),
+          backgroundColor: Theme.of(context).accentColor,
           elevation: 3,
           onPressed: () {
             Navigator.push(
               context,
               PageRouteBuilder(
-                pageBuilder: (c, a1, a2) => AddTransaction(addTransaction),
+                pageBuilder: (c, a1, a2) =>
+                    AddTransaction(addTransaction, tabController),
                 transitionsBuilder: (c, anim, a2, child) =>
                     FadeTransition(opacity: anim, child: child),
                 transitionDuration: Duration(milliseconds: 500),

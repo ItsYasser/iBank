@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:personal_expenses_2/constants.dart';
 import 'package:personal_expenses_2/home_navigator.dart';
-import 'package:personal_expenses_2/screens/AddTransaction_screen.dart';
-import 'package:personal_expenses_2/screens/History/history_screen.dart';
-import 'package:personal_expenses_2/screens/home/home_screen.dart';
+import 'package:personal_expenses_2/screens/home.dart';
+import 'constants.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,12 +17,17 @@ class MyApp extends StatelessWidget {
       // ! aa
       // * aaaa
       //
-
+      theme: ThemeData(
+        primaryColor: kPrimaryColor,
+        accentColor: kAccentColor,
+        primarySwatch: kSwatchColor,
+      ),
       debugShowCheckedModeBanner: false,
       title: 'Personal Expenses',
       home: HomeBody(),
       routes: {
         Home.routeName: (ctx) => Home(),
+        HomeBody.routeName: (ctx) => HomeBody(),
       },
     );
   }

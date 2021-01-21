@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:personal_expenses_2/constants.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
 
 class DateCard extends StatefulWidget {
@@ -42,7 +43,7 @@ class _DateCardState extends State<DateCard> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: widget.date.day == widget.index
-                  ? [Color(0xffAA2AE2), Color(0xffAA2AE2).withOpacity(0.8)]
+                  ? [kDateCardColor, kDateCardColor.withOpacity(0.8)]
                   : [Colors.white, Colors.white],
             ),
             boxShadow: [

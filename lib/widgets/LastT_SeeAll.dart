@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_expenses_2/models/Transactions.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
 
-import '../../All_Transactions.dart';
+import '../screens/all_transactions.dart';
 
 class LastTseeAll extends StatelessWidget {
   final List<Transaction> transactions;
@@ -35,7 +35,7 @@ class LastTseeAll extends StatelessWidget {
             child: Text(
               "See All",
               style: TextStyle(
-                color: Color(0xff5C01D0),
+                color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.w500,
                 fontSize: ResponsiveFlutter.of(context).fontSize(1.725),
               ),

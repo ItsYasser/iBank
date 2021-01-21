@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
 
-import '../AddTransaction_screen.dart';
-
 class Categories extends StatelessWidget {
   final double realWidth;
   final double realHeight;
