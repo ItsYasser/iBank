@@ -6,8 +6,8 @@ import 'package:personal_expenses_2/widgets/trying.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> listOfTransactions;
-
   Chart({this.listOfTransactions}) {
+    make(listOfTransactions);
     makeList();
   }
   List myList = [];
@@ -31,6 +31,12 @@ class Chart extends StatelessWidget {
         'value': (cpt / total),
       });
     }
+  }
+
+  void make(List<Transaction> list) {
+    Map<String, dynamic> barChart = {};
+
+    print(list.elementAt(1).title);
   }
 
   @override
