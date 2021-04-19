@@ -1,41 +1,83 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:personal_expenses_2/constants.dart';
 
 class BarChartSample2 extends StatefulWidget {
+  final List listOftransactions;
+  final List listOfIncomes;
+  BarChartSample2({this.listOftransactions, this.listOfIncomes});
   @override
   State<StatefulWidget> createState() => BarChartSample2State();
 }
 
 class BarChartSample2State extends State<BarChartSample2> {
-  final Color leftBarColor = const Color(0xff53fdd7);
+  final Color leftBarColor = kPrimaryColor;
   final Color rightBarColor = const Color(0xffff5182);
+  final Color nullBarColor = Colors.grey.withOpacity(0.2);
   final double width = 7;
-
+  List myList = [];
   List<BarChartGroupData> rawBarGroups;
   List<BarChartGroupData> showingBarGroups;
 
   int touchedGroupIndex;
+  List itemList;
+
+  makeList() {
+    if (widget.listOftransactions.isNotEmpty) {
+      for (int i = 0; i < 7; i++) {
+        var dayVar = DateTime.now().subtract(Duration(days: i));
+        double expenses = 0;
+        double incomes = 0;
+        for (int j = 0; j < widget.listOftransactions.length; j++) {
+          if (widget.listOftransactions[j].date.day == dayVar.day &&
+              widget.listOftransactions[j].date.month == dayVar.month &&
+              widget.listOftransactions[j].date.year == dayVar.year) {
+            expenses += widget.listOftransactions[j].amount;
+          }
+        }
+        for (int j = 0; j < widget.listOfIncomes.length; j++) {
+          if (widget.listOfIncomes[j].date.day == dayVar.day &&
+              widget.listOfIncomes[j].date.month == dayVar.month &&
+              widget.listOfIncomes[j].date.year == dayVar.year) {
+            incomes += widget.listOfIncomes[j].amount;
+          }
+        }
+        widget.listOftransactions.removeWhere((element) {
+          return (element.date.day == dayVar.day &&
+              element.date.month == dayVar.month &&
+              element.date.year == dayVar.year);
+        });
+        widget.listOfIncomes.removeWhere((element) {
+          return (element.date.day == dayVar.day &&
+              element.date.month == dayVar.month &&
+              element.date.year == dayVar.year);
+        });
+        myList.add({
+          'expense': expenses,
+          'income': incomes,
+          'day': dayVar,
+        });
+      }
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    final barGroup1 = makeGroupData(0, 20, 5);
-    final barGroup2 = makeGroupData(1, 16, 12);
-    final barGroup3 = makeGroupData(2, 18, 5);
-    final barGroup4 = makeGroupData(3, 20, 16);
-    final barGroup5 = makeGroupData(4, 17, 6);
-    final barGroup6 = makeGroupData(5, 19, 1.5);
-    final barGroup7 = makeGroupData(6, 10, 1.5);
+    makeList();
 
-    final items = [
-      barGroup1,
-      barGroup2,
-      barGroup3,
-      barGroup4,
-      barGroup5,
-      barGroup6,
-      barGroup7,
-    ];
+    int i = -1;
+    final items = myList.reversed.map((e) {
+      i++;
+      // TODO:  change the random thing
+      return makeGroupData(
+          i,
+          num.parse((e['expense'] / 1000).toStringAsFixed(2)),
+          num.parse((e['income'] / 1000).toStringAsFixed(2)));
+    }).toList();
 
     rawBarGroups = items;
 
@@ -44,164 +86,179 @@ class BarChartSample2State extends State<BarChartSample2> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-        color: const Color(0xff2c4260),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  makeTransactionsIcon(),
-                  const SizedBox(
-                    width: 38,
-                  ),
-                  const Text(
-                    'Transactions',
-                    style: TextStyle(color: Colors.white, fontSize: 22),
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  const Text(
-                    'state',
-                    style: TextStyle(color: Color(0xff77839a), fontSize: 16),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 38,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: BarChart(
-                    BarChartData(
-                      maxY: 20,
-                      barTouchData: BarTouchData(
-                          touchTooltipData: BarTouchTooltipData(
-                            tooltipBgColor: Colors.grey,
-                            getTooltipItem: (_a, _b, _c, _d) => null,
-                          ),
-                          touchCallback: (response) {
-                            if (response.spot == null) {
-                              setState(() {
-                                touchedGroupIndex = -1;
-                                showingBarGroups = List.of(rawBarGroups);
-                              });
-                              return;
-                            }
-
-                            touchedGroupIndex =
-                                response.spot.touchedBarGroupIndex;
-
-                            setState(() {
-                              if (response.touchInput is FlLongPressEnd ||
-                                  response.touchInput is FlPanEnd) {
-                                touchedGroupIndex = -1;
-                                showingBarGroups = List.of(rawBarGroups);
-                              } else {
-                                showingBarGroups = List.of(rawBarGroups);
-                                if (touchedGroupIndex != -1) {
-                                  double sum = 0;
-                                  for (BarChartRodData rod
-                                      in showingBarGroups[touchedGroupIndex]
-                                          .barRods) {
-                                    sum += rod.y;
-                                  }
-                                  final avg = sum /
-                                      showingBarGroups[touchedGroupIndex]
-                                          .barRods
-                                          .length;
-
-                                  showingBarGroups[touchedGroupIndex] =
-                                      showingBarGroups[touchedGroupIndex]
-                                          .copyWith(
-                                    barRods: showingBarGroups[touchedGroupIndex]
-                                        .barRods
-                                        .map((rod) {
-                                      return rod.copyWith(y: avg);
-                                    }).toList(),
-                                  );
-                                }
-                              }
-                            });
-                          }),
-                      titlesData: FlTitlesData(
-                        show: true,
-                        bottomTitles: SideTitles(
-                          showTitles: true,
-                          getTextStyles: (value) => const TextStyle(
-                              color: Color(0xff7589a2),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14),
-                          margin: 20,
-                          getTitles: (double value) {
-                            switch (value.toInt()) {
-                              case 0:
-                                return 'Mn';
-                              case 1:
-                                return 'Te';
-                              case 2:
-                                return 'Wd';
-                              case 3:
-                                return 'Tu';
-                              case 4:
-                                return 'Fr';
-                              case 5:
-                                return 'St';
-                              case 6:
-                                return 'Sn';
-                              default:
-                                return '';
-                            }
-                          },
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 50),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "${DateFormat(DateFormat.MONTH).format(DateTime.now())} - ${DateTime.now().year}",
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            //11 -- 17
+            "${DateTime.now().subtract(Duration(days: 6)).day} ${DateFormat(DateFormat.ABBR_MONTH).format(DateTime.now().subtract(Duration(days: 6)))} ----> ${DateTime.now().day} ${DateFormat(DateFormat.ABBR_MONTH).format(DateTime.now())} \n",
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          AspectRatio(
+            aspectRatio: 1,
+            child: Card(
+              margin: EdgeInsets.all(3),
+              elevation: 1.2,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 20, 12, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        makeTransactionsIcon(),
+                        const SizedBox(
+                          width: 38,
                         ),
-                        leftTitles: SideTitles(
-                          showTitles: true,
-                          getTextStyles: (value) => const TextStyle(
-                              color: Color(0xff7589a2),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14),
-                          margin: 32,
-                          reservedSize: 14,
-                          getTitles: (value) {
-                            if (value == 0) {
-                              return '1K';
-                            } else if (value == 10) {
-                              return '5K';
-                            } else if (value == 19) {
-                              return '10K';
-                            } else {
-                              return '';
-                            }
-                          },
+                        const Text(
+                          'Transactions',
+                          style: TextStyle(color: Colors.indigo, fontSize: 22),
                         ),
-                      ),
-                      borderData: FlBorderData(
-                        show: false,
-                      ),
-                      barGroups: showingBarGroups,
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        const Text(
+                          'state',
+                          style: TextStyle(color: Colors.amber, fontSize: 16),
+                        ),
+                      ],
                     ),
-                  ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                        child: BarChart(
+                          BarChartData(
+                            maxY: 20,
+                            titlesData: FlTitlesData(
+                              show: true,
+                              bottomTitles: SideTitles(
+                                showTitles: true,
+                                getTextStyles: (value) => const TextStyle(
+                                    color: Colors.indigo,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14),
+                                margin: 20,
+                                getTitles: (double value) {
+                                  switch (value.toInt()) {
+                                    case 0:
+                                      return DateFormat(DateFormat.ABBR_WEEKDAY)
+                                          .format(myList[0]['day'])
+                                          .substring(0, 2);
+                                    case 1:
+                                      return DateFormat(DateFormat.ABBR_WEEKDAY)
+                                          .format(myList[1]['day'])
+                                          .substring(0, 2);
+                                    case 2:
+                                      return DateFormat(DateFormat.ABBR_WEEKDAY)
+                                          .format(myList[2]['day'])
+                                          .substring(0, 2);
+                                    case 3:
+                                      return DateFormat(DateFormat.ABBR_WEEKDAY)
+                                          .format(myList[3]['day'])
+                                          .substring(0, 2);
+                                    case 4:
+                                      return DateFormat(DateFormat.ABBR_WEEKDAY)
+                                          .format(myList[4]['day'])
+                                          .substring(0, 2);
+                                    case 5:
+                                      return DateFormat(DateFormat.ABBR_WEEKDAY)
+                                          .format(myList[5]['day'])
+                                          .substring(0, 2);
+                                    case 6:
+                                      return DateFormat(DateFormat.ABBR_WEEKDAY)
+                                          .format(myList[6]['day'])
+                                          .substring(0, 2);
+                                    default:
+                                      return '';
+                                  }
+                                },
+                              ),
+                              leftTitles: SideTitles(
+                                showTitles: true,
+                                getTextStyles: (value) => const TextStyle(
+                                    color: Colors.indigo,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14),
+                                margin: 32,
+                                reservedSize: 14,
+                                getTitles: (value) {
+                                  if (value == 1) {
+                                    return '1K';
+                                  } else if (value == 5) {
+                                    return '5K';
+                                  } else if (value == 10) {
+                                    return '10K';
+                                  } else if (value == 15) {
+                                    return '15K';
+                                  } else if (value == 20) {
+                                    return '20K';
+                                  } else {
+                                    return '';
+                                  }
+                                },
+                              ),
+                            ),
+                            borderData: FlBorderData(
+                              show: false,
+                            ),
+                            barGroups: showingBarGroups,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        indicators(context, rightBarColor, "Income"),
+                        indicators(context, leftBarColor, "Expenses"),
+                        indicators(context, nullBarColor, "Not Yet"),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 12,
-              ),
-            ],
+            ),
           ),
-        ),
+        ],
+      ),
+    );
+  }
+
+  Widget indicators(BuildContext context, Color color, String text) {
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Row(
+        children: <Widget>[
+          CircleAvatar(
+            backgroundColor: color,
+            radius: 5,
+          ),
+          const SizedBox(
+            width: 7,
+          ),
+          Text(
+            text,
+            style: TextStyle(
+                fontSize: 14, fontWeight: FontWeight.bold, color: color),
+          ),
+        ],
       ),
     );
   }
@@ -209,13 +266,13 @@ class BarChartSample2State extends State<BarChartSample2> {
   BarChartGroupData makeGroupData(int x, double y1, double y2) {
     return BarChartGroupData(barsSpace: 4, x: x, barRods: [
       BarChartRodData(
-        y: y1,
-        colors: [leftBarColor],
+        y: y1 == 0 ? 20 : y1,
+        colors: y1 != 0 ? [leftBarColor] : [nullBarColor],
         width: width,
       ),
       BarChartRodData(
-        y: y2,
-        colors: [rightBarColor],
+        y: y2 == 0 ? 20 : y2,
+        colors: y2 != 0 ? [rightBarColor] : [nullBarColor],
         width: width,
       ),
     ]);
@@ -231,7 +288,7 @@ class BarChartSample2State extends State<BarChartSample2> {
         Container(
           width: width,
           height: 10,
-          color: Colors.white.withOpacity(0.4),
+          color: Colors.blue.withOpacity(0.7),
         ),
         const SizedBox(
           width: space,
@@ -239,7 +296,7 @@ class BarChartSample2State extends State<BarChartSample2> {
         Container(
           width: width,
           height: 28,
-          color: Colors.white.withOpacity(0.8),
+          color: Colors.amber.withOpacity(0.6),
         ),
         const SizedBox(
           width: space,
@@ -247,7 +304,7 @@ class BarChartSample2State extends State<BarChartSample2> {
         Container(
           width: width,
           height: 42,
-          color: Colors.white.withOpacity(1),
+          color: Colors.blue,
         ),
         const SizedBox(
           width: space,
@@ -255,7 +312,7 @@ class BarChartSample2State extends State<BarChartSample2> {
         Container(
           width: width,
           height: 28,
-          color: Colors.white.withOpacity(0.8),
+          color: Colors.amber.withOpacity(0.6),
         ),
         const SizedBox(
           width: space,
@@ -263,7 +320,7 @@ class BarChartSample2State extends State<BarChartSample2> {
         Container(
           width: width,
           height: 10,
-          color: Colors.white.withOpacity(0.4),
+          color: Colors.blue.withOpacity(0.7),
         ),
       ],
     );

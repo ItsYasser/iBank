@@ -19,7 +19,7 @@ class AddIncome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void sendData() {
-      updateIncome(_amount);
+      updateIncome(_amount, _selectedDate, DateTime.now().toString());
       Navigator.pop(context);
     }
 

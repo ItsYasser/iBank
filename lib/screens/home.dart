@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
 
   final double incomeValue;
   final double expensesValue;
-  final List<Transaction> allTransactions;
+
   final List<Transaction> transactions;
   final Function setIncome;
 
@@ -20,7 +20,6 @@ class Home extends StatelessWidget {
       {Key key,
       this.incomeValue,
       this.expensesValue,
-      this.allTransactions,
       this.setIncome,
       this.transactions})
       : super(key: key);
@@ -86,7 +85,7 @@ class Home extends StatelessWidget {
             height: realHeight * 0.025,
           ),
           LastTseeAll(
-            transactions: allTransactions,
+            transactions: transactions,
           ),
           Expanded(
             child: Container(
@@ -100,13 +99,16 @@ class Home extends StatelessWidget {
                   mainAxisAlignment: transactions.length <= 2
                       ? MainAxisAlignment.start
                       : MainAxisAlignment.spaceEvenly,
-                  children: transactions.map((tx) {
+                  children: transactions
+                      .getRange(
+                          0, transactions.length < 3 ? transactions.length : 3)
+                      .map((tx) {
                     return TransactionCard(
                       amount: tx.amount,
                       date: tx.date,
                       id: tx.id,
                       title: tx.title,
-                      color: tx.category['color'],
+                      category: tx.category,
                     );
                   }).toList(),
                 ),

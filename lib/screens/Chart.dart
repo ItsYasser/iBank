@@ -1,47 +1,19 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_expenses_2/models/Income.dart';
 import 'package:personal_expenses_2/models/Transactions.dart';
 import 'package:personal_expenses_2/widgets/circle_chart.dart';
 import 'package:personal_expenses_2/widgets/trying.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> listOfTransactions;
-  Chart({this.listOfTransactions}) {
-    make(listOfTransactions);
-    makeList();
-  }
-  List myList = [];
-  void makeList() {
-    double cpt;
-    int total = listOfTransactions.length;
-    while (listOfTransactions.isNotEmpty) {
-      var first = listOfTransactions[0];
-      cpt = 0;
-      for (int j = 0; j < listOfTransactions.length; j++) {
-        if (listOfTransactions[j].category['name'] == first.category['name']) {
-          cpt += 1;
-        }
-      }
-      listOfTransactions.removeWhere((element) {
-        return element.category['name'] == first.category['name'];
-      });
-      myList.add({
-        'name': first.category['name'],
-        'color': first.category['color'],
-        'value': (cpt / total),
-      });
-    }
-  }
-
-  void make(List<Transaction> list) {
-    Map<String, dynamic> barChart = {};
-
-    print(list.elementAt(1).title);
-  }
+  final List<Income> listOfIncomes;
+  Chart({this.listOfTransactions, this.listOfIncomes});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       extendBody: true,
       appBar: AppBar(
         title: Text(
@@ -53,26 +25,18 @@ class Chart extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 60),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // CircleChart(myList: myList),
+              CircleChart(listOfTransactions: List.from(listOfTransactions)),
               SizedBox(
-                height: 210,
+                height: 30,
               ),
-              Text(
-                "Janvier - Week 3",
-                style: Theme.of(context).textTheme.headline6,
+              BarChartSample2(
+                listOftransactions: List.from(listOfTransactions),
+                listOfIncomes: List.from(listOfIncomes),
               ),
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                "11 Oct - 17 OCT 2020",
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              BarChartSample2(),
             ],
           ),
         ),

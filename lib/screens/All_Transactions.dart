@@ -25,7 +25,7 @@ class AllTransactions extends StatelessWidget {
                 amount: e.amount,
                 date: e.date,
                 id: e.id,
-                color: e.category['color'],
+                category: e.category,
               ),
             );
           }).toList(),

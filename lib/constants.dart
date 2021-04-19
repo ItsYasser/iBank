@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_flutter/responsive_flutter.dart';
 
+import 'models/Income.dart';
 import 'models/Transactions.dart';
 
 Color kPrimaryColor = Color(0xff5C01D0);
@@ -8,9 +8,10 @@ Color kAccentColor = Color(0xff5C01D0);
 Color kOneCurveColor = Color(0xffAA2AE2);
 Color kTwoCurvesColor = Color(0xff8A1AE6);
 Color kDateCardColor = Color(0xffAA2AE2);
-List<Transaction> kAllTransactions = [
+
+List<Transaction> kTransaction = [
   Transaction(
-      amount: 60.02,
+      amount: 500.02,
       date: DateTime.now(),
       title: 'New Shoes',
       category: {
@@ -18,82 +19,52 @@ List<Transaction> kAllTransactions = [
         'color': Colors.blue,
       }),
   Transaction(
-      amount: 60.02,
-      date: DateTime.now(),
+      amount: 1030.03,
+      date: DateTime.now().subtract(Duration(days: 1)),
+      title: 'New Shoes',
+      category: {
+        'name': 'Social & Lifestyle',
+        'color': Colors.purple,
+      }),
+  Transaction(
+      amount: 5036.02,
+      date: DateTime.now().subtract(Duration(days: 2)),
+      title: 'New Shoes',
+      category: {
+        'name': 'Beauty & Health',
+        'color': Colors.red,
+      }),
+  Transaction(
+      amount: 18800,
+      date: DateTime.now().subtract(Duration(days: 3)),
       title: 'New Shoes',
       category: {
         'name': 'Other',
-        'color': Colors.amber,
-      }),
-  Transaction(
-      amount: 60.03,
-      date: DateTime.now(),
-      title: 'New Shoes',
-      category: {
-        'name': 'Social & Lifestyle',
-        'color': Colors.purple,
-      }),
-  Transaction(
-      amount: 60.02,
-      date: DateTime.now(),
-      title: 'New Shoes',
-      category: {
-        'name': 'Beauty & Health',
-        'color': Colors.red,
-      }),
-  Transaction(
-      amount: 60.02,
-      date: DateTime.now(),
-      title: 'New Shoes',
-      category: {
-        'name': 'Beauty & Health',
-        'color': Colors.red,
-      }),
-  Transaction(
-      amount: 60.03,
-      date: DateTime.now(),
-      title: 'New Shoes',
-      category: {
-        'name': 'Entertainement',
-        'color': Colors.blue,
-      }),
-  Transaction(
-      amount: 60.03,
-      date: DateTime.now(),
-      title: 'New Shoes',
-      category: {
-        'name': 'Entertainement',
-        'color': Colors.blue,
+        'color': Colors.green,
       }),
 ];
-List<Transaction> kTransaction = [
-  Transaction(
-      amount: 60.02,
-      date: DateTime.now(),
-      title: 'New Shoes',
-      category: {
-        'name': 'Entertainement',
-        'color': Colors.blue,
-      }),
-  Transaction(
-      amount: 60.03,
-      date: DateTime.now(),
-      title: 'New Shoes',
-      category: {
-        'name': 'Social & Lifestyle',
-        'color': Colors.purple,
-      }),
-  Transaction(
-      amount: 60.02,
-      date: DateTime.now(),
-      title: 'New Shoes',
-      category: {
-        'name': 'Beauty & Health',
-        'color': Colors.red,
-      }),
+
+List<Income> kIncomes = [
+  Income(
+    id: DateTime.now().toString(),
+    amount: 5000.0,
+    date: DateTime.now(),
+  ),
+  Income(
+    id: DateTime.now().toString(),
+    amount: 20000.0,
+    date: DateTime.now().subtract(Duration(days: 1)),
+  ),
+  Income(
+    id: DateTime.now().toString(),
+    amount: 9000.0,
+    date: DateTime.now().subtract(Duration(days: 2)),
+  ),
 ];
 int kNumDays = 5;
+
 MaterialColor kSwatchColor = MaterialColor(0xff5C01D0, color);
+
 Map<int, Color> color = {
   50: Color.fromRGBO(4, 131, 184, .1),
   100: Color.fromRGBO(4, 131, 184, .2),

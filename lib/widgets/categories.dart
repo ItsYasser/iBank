@@ -3,23 +3,24 @@ import 'package:responsive_flutter/responsive_flutter.dart';
 
 class Categories extends StatelessWidget {
   final double realWidth;
+  // final String immage;
   final double realHeight;
   final Color color;
   final text;
   final character;
   final Function function;
   final bool lastIndex;
-
-  const Categories(
-      {Key key,
-      this.realWidth,
-      this.realHeight,
-      this.color,
-      this.text,
-      this.function,
-      this.lastIndex,
-      this.character})
-      : super(key: key);
+  const Categories({
+    Key key,
+    this.realWidth,
+    this.realHeight,
+    this.color,
+    this.text,
+    this.function,
+    this.lastIndex,
+    this.character,
+    // @required this.immage,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(

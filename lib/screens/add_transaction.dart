@@ -9,6 +9,12 @@ import 'package:responsive_flutter/responsive_flutter.dart';
 Map<String, dynamic> categories = {
   'Text': ['Entertainement', 'Social & Lifestyle', 'Beauty & Health', 'Other'],
   'color': [Colors.blueAccent, Colors.purple, Colors.red, Colors.greenAccent],
+  // 'image': [
+  //   'Entertainement40.png',
+  //   'Lifestyle40.png',
+  //   'Beauty40.png',
+  //   'Other40.png'
+  // ]
 };
 
 class AddTransaction extends StatefulWidget {
@@ -23,6 +29,7 @@ class _AddTransactionState extends State<AddTransaction> {
   Color _categoryColor;
   String _titleValue;
   String _category;
+  // String _categoryImage;
   double _amountValue;
   DateTime _selectedDate = DateTime.now();
 
@@ -31,12 +38,14 @@ class _AddTransactionState extends State<AddTransaction> {
     super.initState();
     _categoryColor = categories['color'][0];
     _category = categories['Text'][0];
+    // _categoryImage = categories['image'][0];
   }
 
   void changeCategory(Map<dynamic, dynamic> category) {
     setState(() {
       _category = category['text'];
       _categoryColor = category['color'];
+      // _categoryImage = category['image'];
     });
   }
 
@@ -58,6 +67,7 @@ class _AddTransactionState extends State<AddTransaction> {
           color: categories['color'][i],
           text: categories['Text'][i],
           character: _category,
+          // immage: categories['image'][i],
           function: changeCategory,
           lastIndex: lastIndex,
         ),
@@ -162,7 +172,11 @@ class _AddTransactionState extends State<AddTransaction> {
             title: _titleValue,
             amount: _amountValue,
             dateTime: _selectedDate,
-            category: {'name': _category, 'color': _categoryColor});
+            category: {
+              'name': _category,
+              'color': _categoryColor,
+              // 'image': _categoryImage
+            });
         widget.tabController.animateTo(0);
         Navigator.pop(context);
       },

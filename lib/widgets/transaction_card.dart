@@ -7,8 +7,24 @@ class TransactionCard extends StatelessWidget {
   final String title;
   final double amount;
   final DateTime date;
-  final Color color;
-  TransactionCard({this.id, this.title, this.amount, this.date, this.color});
+  final Map category;
+  TransactionCard({this.id, this.title, this.amount, this.date, this.category});
+  String getImage() {
+    //'Entertainement', 'Social & Lifestyle', 'Beauty & Health', 'Other'
+    switch (category['name']) {
+      case 'Entertainement':
+        return 'Entertainement40';
+      case 'Social & Lifestyle':
+        return 'Lifestyle40';
+      case 'Beauty & Health':
+        return 'Beauty40';
+      case 'Other':
+        return 'Other40';
+      default:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -29,7 +45,7 @@ class TransactionCard extends StatelessWidget {
             //TODO/ adrob tola hna rak dayer width howa height ha ahchem
             width: size.height * 0.011,
             decoration: BoxDecoration(
-              color: color,
+              color: category['color'],
               borderRadius: BorderRadius.circular(30),
             ),
           ),
@@ -51,7 +67,7 @@ class TransactionCard extends StatelessWidget {
             ),
             child: Container(
               child: Image.asset(
-                "assets/spotify26.png",
+                "assets/" + getImage() + ".png",
                 // fit: BoxFit.cover,
               ),
             ),

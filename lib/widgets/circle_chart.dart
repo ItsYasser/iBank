@@ -2,17 +2,41 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class CircleChart extends StatelessWidget {
-  const CircleChart({
-    Key key,
-    @required this.myList,
-  }) : super(key: key);
+  List myList = [];
+  final List listOfTransactions;
 
-  final List myList;
+  CircleChart({
+    @required this.listOfTransactions,
+  }) {
+    makeList();
+  }
+
+  makeList() {
+    int cpt;
+    int total = listOfTransactions.length;
+    while (listOfTransactions.isNotEmpty) {
+      var first = listOfTransactions[0];
+      cpt = 0;
+      for (int j = 0; j < listOfTransactions.length; j++) {
+        if (listOfTransactions[j].category['name'] == first.category['name']) {
+          cpt += 1;
+        }
+      }
+      listOfTransactions.removeWhere((element) {
+        return element.category['name'] == first.category['name'];
+      });
+      myList.add({
+        'name': first.category['name'],
+        'color': first.category['color'],
+        'value': (cpt / total),
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 150,
       // color: Colors.red,
       child: Row(
         children: [
@@ -22,7 +46,6 @@ class CircleChart extends StatelessWidget {
                 borderData: FlBorderData(show: false),
                 centerSpaceRadius: double.infinity,
                 sectionsSpace: 0,
-                // read about it in the below section
                 sections: myList.map((e) {
                   return PieChartSectionData(
                     radius: 28,
@@ -38,7 +61,8 @@ class CircleChart extends StatelessWidget {
             width: 15,
           ),
           Column(
-            mainAxisSize: MainAxisSize.max,
+            // mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: myList.map((e) {
               return Indicator(
@@ -68,7 +92,7 @@ class Indicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(10.0),
       child: Row(
         children: <Widget>[
           CircleAvatar(

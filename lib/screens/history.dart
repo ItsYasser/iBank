@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_expenses_2/constants.dart';
 import 'package:personal_expenses_2/models/Transactions.dart';
 import 'package:personal_expenses_2/Widgets/transaction_card.dart';
+import 'package:personal_expenses_2/widgets/LastT_SeeAll.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
 
 import '../Widgets/DateCard.dart';
@@ -89,30 +90,8 @@ class _HistoryState extends State<History> {
           SizedBox(
             height: realHeight * 0.05,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: realWidth * 0.045),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              children: [
-                Text(
-                  "Transactions",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: ResponsiveFlutter.of(context).fontSize(2.3),
-                  ),
-                ),
-                Text(
-                  "See All",
-                  style: TextStyle(
-                    color: Color(0xff5C01D0),
-                    fontWeight: FontWeight.w500,
-                    fontSize: ResponsiveFlutter.of(context).fontSize(1.725),
-                  ),
-                ),
-              ],
-            ),
+          LastTseeAll(
+            transactions: _newList,
           ),
           SizedBox(
             height: realHeight * 0.02,
@@ -129,13 +108,15 @@ class _HistoryState extends State<History> {
                   mainAxisAlignment: _newList.length <= 2
                       ? MainAxisAlignment.start
                       : MainAxisAlignment.spaceEvenly,
-                  children: _newList.map((tx) {
+                  children: _newList
+                      .getRange(0, _newList.length < 3 ? _newList.length : 3)
+                      .map((tx) {
                     return TransactionCard(
                       amount: tx.amount,
                       date: tx.date,
                       id: tx.id,
                       title: tx.title,
-                      color: tx.category['color'],
+                      category: tx.category,
                     );
                   }).toList(),
                 ),
