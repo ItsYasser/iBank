@@ -14,13 +14,13 @@ class Home extends StatelessWidget {
   final double expensesValue;
 
   final List<Transaction> transactions;
-  final Function setIncome;
+  final Function updateIncome;
 
   const Home(
       {Key key,
       this.incomeValue,
       this.expensesValue,
-      this.setIncome,
+      this.updateIncome,
       this.transactions})
       : super(key: key);
 
@@ -54,7 +54,7 @@ class Home extends StatelessWidget {
       builder: (BuildContext context) {
         return AddIncome(
           income: incomeValue,
-          updateIncome: setIncome,
+          updateIncome: updateIncome,
         );
       },
     );

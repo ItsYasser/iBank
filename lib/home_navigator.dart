@@ -6,7 +6,6 @@ import 'package:personal_expenses_2/screens/history.dart';
 import 'package:personal_expenses_2/screens/profile.dart';
 import 'package:personal_expenses_2/Widgets/centeredFab.dart';
 import 'package:personal_expenses_2/screens/home.dart';
-
 import 'models/Income.dart';
 import 'models/Transactions.dart';
 
@@ -66,7 +65,7 @@ class _HomeBodyState extends State<HomeBody>
     }
   }
 
-  void addIncome(double value, DateTime date, String id) {
+  void updateIncome(double value, DateTime date, String id) {
     _incomes.add(Income(
       amount: value,
       date: date,
@@ -75,9 +74,6 @@ class _HomeBodyState extends State<HomeBody>
     setState(() {
       _incomeValue += value;
     });
-    // for (Income e in _incomes) {
-    //   print(e.amount);
-    // }
   }
 
   @override
@@ -92,7 +88,7 @@ class _HomeBodyState extends State<HomeBody>
             expensesValue: _expensesValue,
             incomeValue: _incomeValue,
             transactions: _transactions,
-            setIncome: addIncome,
+            updateIncome: updateIncome,
           ),
           History(
             myListOfTransactions: _transactions,

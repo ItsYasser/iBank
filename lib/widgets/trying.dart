@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:personal_expenses_2/constants.dart';
@@ -109,7 +110,7 @@ class BarChartSample2State extends State<BarChartSample2> {
               margin: EdgeInsets.all(3),
               elevation: 1.2,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 20, 12, 0),
+                padding: const EdgeInsets.fromLTRB(15, 20, 6, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -226,9 +227,15 @@ class BarChartSample2State extends State<BarChartSample2> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        indicators(context, rightBarColor, "Income"),
-                        indicators(context, leftBarColor, "Expenses"),
-                        indicators(context, nullBarColor, "Not Yet"),
+                        Expanded(
+                            child:
+                                indicators(context, rightBarColor, "Income")),
+                        Expanded(
+                            child:
+                                indicators(context, leftBarColor, "Expenses")),
+                        Expanded(
+                            child:
+                                indicators(context, nullBarColor, "Not Yet")),
                       ],
                     ),
                   ],
@@ -243,7 +250,7 @@ class BarChartSample2State extends State<BarChartSample2> {
 
   Widget indicators(BuildContext context, Color color, String text) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.only(bottom: 15, top: 15),
       child: Row(
         children: <Widget>[
           CircleAvatar(
