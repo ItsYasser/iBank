@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_expenses_2/models/Income.dart';
 import 'package:personal_expenses_2/models/Transactions.dart';
 import 'package:personal_expenses_2/widgets/circle_chart.dart';
-import 'package:personal_expenses_2/widgets/trying.dart';
+import 'package:personal_expenses_2/widgets/BarChart.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> transactions;
