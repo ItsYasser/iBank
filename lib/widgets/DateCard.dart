@@ -26,7 +26,6 @@ class _DateCardState extends State<DateCard> {
         setState(() {
           selected = true;
         });
-        // clicked = true;
       },
       child: Container(
         margin: EdgeInsets.only(
@@ -34,7 +33,6 @@ class _DateCardState extends State<DateCard> {
             right: realWidth * 0.005,
             top: realHeight * 0.005,
             bottom: realHeight * 0.009),
-        // height: realHeight * 0.15,
         width: realWidth * 0.22,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(23),

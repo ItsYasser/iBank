@@ -63,14 +63,14 @@ class TopHalf extends StatelessWidget {
                   text: TextSpan(
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'DZD  ',
+                        text: 'USD  ',
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: ResponsiveFlutter.of(context).fontSize(2),
                         ),
                       ),
                       TextSpan(
-                          text: total.toString(),
+                          text: total.toStringAsFixed(2),
                           style: TextStyle(
                               fontSize:
                                   ResponsiveFlutter.of(context).fontSize(5.175),
@@ -91,7 +91,7 @@ class TopHalf extends StatelessWidget {
                         iconColor: Colors.greenAccent[400],
                         iconData: Icons.arrow_downward,
                         text: "Income",
-                        value: income.toString(),
+                        value: income.toStringAsFixed(2),
                       ),
                       Container(
                         height: size.height * 0.06,
@@ -102,7 +102,7 @@ class TopHalf extends StatelessWidget {
                         iconColor: Colors.redAccent[400],
                         iconData: Icons.arrow_upward,
                         text: "Expenses",
-                        value: expenses.toString(),
+                        value: expenses.toStringAsFixed(2),
                       ),
                     ],
                   ),

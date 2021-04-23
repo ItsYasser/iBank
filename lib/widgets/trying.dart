@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:personal_expenses_2/constants.dart';
 
-class BarChartSample2 extends StatefulWidget {
+class TheBarChart extends StatefulWidget {
   final List listOftransactions;
   final List listOfIncomes;
-  BarChartSample2({this.listOftransactions, this.listOfIncomes});
+  TheBarChart({this.listOftransactions, this.listOfIncomes});
   @override
-  State<StatefulWidget> createState() => BarChartSample2State();
+  State<StatefulWidget> createState() => TheBarChartState();
 }
 
-class BarChartSample2State extends State<BarChartSample2> {
+class TheBarChartState extends State<TheBarChart> {
   final Color leftBarColor = kPrimaryColor;
   final Color rightBarColor = const Color(0xffff5182);
   final Color nullBarColor = Colors.grey.withOpacity(0.2);
@@ -73,7 +73,7 @@ class BarChartSample2State extends State<BarChartSample2> {
     int i = -1;
     final items = myList.reversed.map((e) {
       i++;
-      // TODO:  change the random thing
+
       return makeGroupData(
           i,
           num.parse((e['expense'] / 1000).toStringAsFixed(2)),
@@ -155,15 +155,15 @@ class BarChartSample2State extends State<BarChartSample2> {
                                 margin: 20,
                                 getTitles: (double value) {
                                   switch (value.toInt()) {
-                                    case 0:
+                                    case 6:
                                       return DateFormat(DateFormat.ABBR_WEEKDAY)
                                           .format(myList[0]['day'])
                                           .substring(0, 2);
-                                    case 1:
+                                    case 5:
                                       return DateFormat(DateFormat.ABBR_WEEKDAY)
                                           .format(myList[1]['day'])
                                           .substring(0, 2);
-                                    case 2:
+                                    case 4:
                                       return DateFormat(DateFormat.ABBR_WEEKDAY)
                                           .format(myList[2]['day'])
                                           .substring(0, 2);
@@ -171,15 +171,15 @@ class BarChartSample2State extends State<BarChartSample2> {
                                       return DateFormat(DateFormat.ABBR_WEEKDAY)
                                           .format(myList[3]['day'])
                                           .substring(0, 2);
-                                    case 4:
+                                    case 2:
                                       return DateFormat(DateFormat.ABBR_WEEKDAY)
                                           .format(myList[4]['day'])
                                           .substring(0, 2);
-                                    case 5:
+                                    case 1:
                                       return DateFormat(DateFormat.ABBR_WEEKDAY)
                                           .format(myList[5]['day'])
                                           .substring(0, 2);
-                                    case 6:
+                                    case 0:
                                       return DateFormat(DateFormat.ABBR_WEEKDAY)
                                           .format(myList[6]['day'])
                                           .substring(0, 2);

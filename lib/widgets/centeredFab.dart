@@ -3,9 +3,10 @@ import 'package:personal_expenses_2/screens/add_transaction.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
 
 class FAB extends StatelessWidget {
-  Function addTransaction;
-  TabController tabController;
-  FAB(this.addTransaction, this.tabController);
+  final Function addTransaction;
+  final TabController tabController;
+  final double totalBalance;
+  FAB(this.addTransaction, this.tabController, this.totalBalance);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -21,7 +22,7 @@ class FAB extends StatelessWidget {
               context,
               PageRouteBuilder(
                 pageBuilder: (c, a1, a2) =>
-                    AddTransaction(addTransaction, tabController),
+                    AddTransaction(addTransaction, tabController, totalBalance),
                 transitionsBuilder: (c, anim, a2, child) =>
                     FadeTransition(opacity: anim, child: child),
                 transitionDuration: Duration(milliseconds: 500),

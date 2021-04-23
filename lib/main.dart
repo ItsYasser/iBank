@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Personal Expenses',
-      home: HomeBody(),
+      home: HomeNavigator(),
       routes: {
         Home.routeName: (ctx) => Home(),
-        HomeBody.routeName: (ctx) => HomeBody(),
+        HomeNavigator.routeName: (ctx) => HomeNavigator(),
       },
     );
   }

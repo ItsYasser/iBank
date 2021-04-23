@@ -3,7 +3,6 @@ import 'package:responsive_flutter/responsive_flutter.dart';
 
 class Categories extends StatelessWidget {
   final double realWidth;
-  // final String immage;
   final double realHeight;
   final Color color;
   final text;
@@ -19,7 +18,6 @@ class Categories extends StatelessWidget {
     this.function,
     this.lastIndex,
     this.character,
-    // @required this.immage,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -64,7 +62,7 @@ class Categories extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: realHeight * 0.005,
+          height: realHeight * 0.01,
         ),
         !lastIndex
             ? Divider(

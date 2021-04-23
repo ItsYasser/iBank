@@ -25,7 +25,7 @@ class RichTextWidget extends StatelessWidget {
             ),
             TextSpan(text: " ( " + followingTitle + ":"),
             TextSpan(
-              text: " \$${value.round()}",
+              text: " \$${value.toStringAsFixed(2)}",
               style: TextStyle(
                 color: Colors.purpleAccent[700],
                 fontWeight: FontWeight.w900,

@@ -9,13 +9,13 @@ import 'package:personal_expenses_2/screens/home.dart';
 import 'models/Income.dart';
 import 'models/Transactions.dart';
 
-class HomeBody extends StatefulWidget {
-  static const routeName = 'HomeBody';
+class HomeNavigator extends StatefulWidget {
+  static const routeName = 'HomeNavigator';
   @override
-  _HomeBodyState createState() => _HomeBodyState();
+  _HomeNavigatorState createState() => _HomeNavigatorState();
 }
 
-class _HomeBodyState extends State<HomeBody>
+class _HomeNavigatorState extends State<HomeNavigator>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
 
@@ -33,7 +33,7 @@ class _HomeBodyState extends State<HomeBody>
     _tabController.dispose();
   }
 
-  List<Transaction> _transactions = kTransaction;
+  List<Transaction> _transactions = kTransactions;
   List<Income> _incomes = kIncomes;
   double _expensesValue = 0;
   double _incomeValue = 0;
@@ -53,6 +53,17 @@ class _HomeBodyState extends State<HomeBody>
     });
   }
 
+  void _addNewIncome(double value, DateTime date, String id) {
+    _incomes.add(Income(
+      amount: value,
+      date: date,
+      id: id,
+    ));
+    setState(() {
+      _incomeValue += value;
+    });
+  }
+
   void setIncomeValue() {
     for (int i = 0; i < _incomes.length; i++) {
       _incomeValue += _incomes[i].amount;
@@ -65,22 +76,9 @@ class _HomeBodyState extends State<HomeBody>
     }
   }
 
-  void updateIncome(double value, DateTime date, String id) {
-    _incomes.add(Income(
-      amount: value,
-      date: date,
-      id: id,
-    ));
-    setState(() {
-      _incomeValue += value;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
       extendBody: true,
       body: TabBarView(
         children: [
@@ -88,16 +86,16 @@ class _HomeBodyState extends State<HomeBody>
             expensesValue: _expensesValue,
             incomeValue: _incomeValue,
             transactions: _transactions,
-            updateIncome: updateIncome,
+            updateIncome: _addNewIncome,
           ),
           History(
-            myListOfTransactions: _transactions,
+            transactions: _transactions,
           ),
           Chart(
-            listOfTransactions: _transactions,
-            listOfIncomes: _incomes,
+            transactions: _transactions,
+            incomes: _incomes,
           ),
-          Profile(),
+          Profile(_transactions.length, _incomes.length),
         ],
         physics: NeverScrollableScrollPhysics(),
         controller: _tabController,
@@ -105,7 +103,8 @@ class _HomeBodyState extends State<HomeBody>
       bottomNavigationBar: BottomNavBarFinal(
         tabController: _tabController,
       ),
-      floatingActionButton: FAB(_addNewTransaction, _tabController),
+      floatingActionButton: FAB(
+          _addNewTransaction, _tabController, _incomeValue - _expensesValue),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

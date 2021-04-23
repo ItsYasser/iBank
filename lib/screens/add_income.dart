@@ -9,8 +9,8 @@ double _amount;
 
 class AddIncome extends StatelessWidget {
   final Function updateIncome;
-  AddIncome({this.income, this.updateIncome});
   final double income;
+  AddIncome({this.income, this.updateIncome});
 
   DateTime _selectedDate = DateTime.now();
 
@@ -38,7 +38,7 @@ class AddIncome extends StatelessWidget {
               height: 25,
             ),
             TextField(
-              onSubmitted: (value) {
+              onChanged: (value) {
                 _amount = double.parse(value);
               },
               cursorColor: Colors.purple[600],

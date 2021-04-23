@@ -9,37 +9,69 @@ Color kOneCurveColor = Color(0xffAA2AE2);
 Color kTwoCurvesColor = Color(0xff8A1AE6);
 Color kDateCardColor = Color(0xffAA2AE2);
 
-List<Transaction> kTransaction = [
+List<Transaction> kTransactions = [
   Transaction(
-      amount: 500.02,
-      date: DateTime.now(),
-      title: 'New Shoes',
-      category: {
-        'name': 'Entertainement',
-        'color': Colors.blue,
-      }),
-  Transaction(
-      amount: 1030.03,
+      amount: 500.0,
       date: DateTime.now().subtract(Duration(days: 1)),
-      title: 'New Shoes',
+      title: 'New Bike',
       category: {
         'name': 'Social & Lifestyle',
         'color': Colors.purple,
       }),
   Transaction(
-      amount: 5036.02,
+      amount: 59.99,
       date: DateTime.now().subtract(Duration(days: 2)),
-      title: 'New Shoes',
+      title: 'Call Of Duty',
+      category: {
+        'name': 'Entertainement',
+        'color': Colors.blue,
+      }),
+  Transaction(
+      amount: 22.57,
+      date: DateTime.now().subtract(Duration(days: 6)),
+      title: 'Skin Care Product',
       category: {
         'name': 'Beauty & Health',
         'color': Colors.red,
       }),
   Transaction(
-      amount: 18800,
-      date: DateTime.now().subtract(Duration(days: 3)),
-      title: 'New Shoes',
+      amount: 7570,
+      date: DateTime.now().subtract(Duration(days: 2)),
+      title: 'Leather Gold & Silver Monopoly Set',
+      category: {
+        'name': 'Entertainement',
+        'color': Colors.blue,
+      }),
+  Transaction(
+      amount: 18993,
+      date: DateTime.now().subtract(Duration(days: 1)),
+      title: 'Crystal Ergoripado Vaccum',
       category: {
         'name': 'Other',
+        'color': Colors.green,
+      }),
+  Transaction(
+      amount: 10000,
+      date: DateTime.now().subtract(Duration(days: 6)),
+      title: 'Social & Lifestyle',
+      category: {
+        'name': 'Entertainement',
+        'color': Colors.blue,
+      }),
+  Transaction(
+      amount: 1500,
+      date: DateTime.now().subtract(Duration(days: 3)),
+      title: 'Tiffany Tennis Ball Can',
+      category: {
+        'name': 'Entertainement',
+        'color': Colors.green,
+      }),
+  Transaction(
+      amount: 8250,
+      date: DateTime.now().subtract(Duration(days: 5)),
+      title: 'Louis Vuitton Skateboard',
+      category: {
+        'name': 'Entertainement',
         'color': Colors.green,
       }),
 ];
@@ -52,16 +84,26 @@ List<Income> kIncomes = [
   ),
   Income(
     id: DateTime.now().toString(),
-    amount: 20000.0,
+    amount: 10000.0,
     date: DateTime.now().subtract(Duration(days: 1)),
   ),
   Income(
     id: DateTime.now().toString(),
-    amount: 9000.0,
+    amount: 7000.0,
     date: DateTime.now().subtract(Duration(days: 2)),
   ),
+  Income(
+    id: DateTime.now().toString(),
+    amount: 10000.0,
+    date: DateTime.now().subtract(Duration(days: 3)),
+  ),
+  Income(
+    id: DateTime.now().toString(),
+    amount: 15000.0,
+    date: DateTime.now().subtract(Duration(days: 5)),
+  ),
 ];
-int kNumDays = 5;
+int kNumDays = 7;
 
 MaterialColor kSwatchColor = MaterialColor(0xff5C01D0, color);
 

@@ -15,16 +15,11 @@ class BottomNavBarFinal extends StatelessWidget {
     return ClipPath(
       clipper: MyCustomClipper3(radius: realWidth * 0.06),
       child: Padding(
-        // padding: EdgeInsets.only(
-        //     left: realWidth * 0.07,
-        //     right: realWidth * 0.07,
-        //     bottom: realHeight * 0.015),
         padding: EdgeInsets.symmetric(
             horizontal: realWidth * 0.07, vertical: realHeight * 0.01),
         child: Container(
           height: realHeight * 0.085,
           width: double.infinity,
-          // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),

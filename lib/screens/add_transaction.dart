@@ -9,18 +9,13 @@ import 'package:responsive_flutter/responsive_flutter.dart';
 Map<String, dynamic> categories = {
   'Text': ['Entertainement', 'Social & Lifestyle', 'Beauty & Health', 'Other'],
   'color': [Colors.blueAccent, Colors.purple, Colors.red, Colors.greenAccent],
-  // 'image': [
-  //   'Entertainement40.png',
-  //   'Lifestyle40.png',
-  //   'Beauty40.png',
-  //   'Other40.png'
-  // ]
 };
 
 class AddTransaction extends StatefulWidget {
-  TabController tabController;
+  final TabController tabController;
+  final double totalBallance;
   final Function addTransaction;
-  AddTransaction(this.addTransaction, this.tabController);
+  AddTransaction(this.addTransaction, this.tabController, this.totalBallance);
   @override
   _AddTransactionState createState() => _AddTransactionState();
 }
@@ -29,7 +24,7 @@ class _AddTransactionState extends State<AddTransaction> {
   Color _categoryColor;
   String _titleValue;
   String _category;
-  // String _categoryImage;
+
   double _amountValue;
   DateTime _selectedDate = DateTime.now();
 
@@ -38,14 +33,12 @@ class _AddTransactionState extends State<AddTransaction> {
     super.initState();
     _categoryColor = categories['color'][0];
     _category = categories['Text'][0];
-    // _categoryImage = categories['image'][0];
   }
 
   void changeCategory(Map<dynamic, dynamic> category) {
     setState(() {
       _category = category['text'];
       _categoryColor = category['color'];
-      // _categoryImage = category['image'];
     });
   }
 
@@ -67,7 +60,6 @@ class _AddTransactionState extends State<AddTransaction> {
           color: categories['color'][i],
           text: categories['Text'][i],
           character: _category,
-          // immage: categories['image'][i],
           function: changeCategory,
           lastIndex: lastIndex,
         ),
@@ -78,7 +70,6 @@ class _AddTransactionState extends State<AddTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    print(_categoryColor);
     final realHeight = MediaQuery.of(context).size.height -
         buildAppBar(context).preferredSize.height -
         MediaQuery.of(context).padding.top;
@@ -101,7 +92,7 @@ class _AddTransactionState extends State<AddTransaction> {
                 height: 15,
               ),
               TextField(
-                onSubmitted: (value) {
+                onChanged: (value) {
                   _titleValue = value;
                 },
                 cursorColor: Theme.of(context).primaryColor,
@@ -124,12 +115,12 @@ class _AddTransactionState extends State<AddTransaction> {
               const SizedBox(
                 height: 30,
               ),
-              RichTextWidget("Amount", "Your Balance", 425),
+              RichTextWidget("Amount", "Your Balance", widget.totalBallance),
               const SizedBox(
                 height: 25,
               ),
               TextField(
-                onSubmitted: (value) {
+                onChanged: (value) {
                   _amountValue = double.parse(value);
                 },
                 cursorColor: Theme.of(context).primaryColor,
@@ -175,7 +166,6 @@ class _AddTransactionState extends State<AddTransaction> {
             category: {
               'name': _category,
               'color': _categoryColor,
-              // 'image': _categoryImage
             });
         widget.tabController.animateTo(0);
         Navigator.pop(context);
@@ -213,7 +203,6 @@ class _AddTransactionState extends State<AddTransaction> {
 
   Container buildCategoryBox(double realHeight, double realWidth) {
     return Container(
-      height: realHeight * 0.36,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withOpacity(0.5)),
         borderRadius: BorderRadius.circular(20),

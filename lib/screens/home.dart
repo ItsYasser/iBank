@@ -9,10 +9,8 @@ import '../Widgets/transaction_card.dart';
 
 class Home extends StatelessWidget {
   static const String routeName = 'Home';
-
   final double incomeValue;
   final double expensesValue;
-
   final List<Transaction> transactions;
   final Function updateIncome;
 

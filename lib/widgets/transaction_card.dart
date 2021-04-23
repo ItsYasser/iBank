@@ -9,8 +9,8 @@ class TransactionCard extends StatelessWidget {
   final DateTime date;
   final Map category;
   TransactionCard({this.id, this.title, this.amount, this.date, this.category});
+
   String getImage() {
-    //'Entertainement', 'Social & Lifestyle', 'Beauty & Health', 'Other'
     switch (category['name']) {
       case 'Entertainement':
         return 'Entertainement40';
@@ -28,7 +28,6 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Container(
       margin: EdgeInsets.only(left: 28, right: 28, top: 13),
       height: size.height * 0.112,
@@ -42,8 +41,7 @@ class TransactionCard extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 18, right: 10),
             height: size.height * 0.081,
-            //TODO/ adrob tola hna rak dayer width howa height ha ahchem
-            width: size.height * 0.011,
+            width: size.width * 0.02,
             decoration: BoxDecoration(
               color: category['color'],
               borderRadius: BorderRadius.circular(30),
@@ -68,7 +66,7 @@ class TransactionCard extends StatelessWidget {
             child: Container(
               child: Image.asset(
                 "assets/" + getImage() + ".png",
-                // fit: BoxFit.cover,
+                fit: BoxFit.scaleDown,
               ),
             ),
           ),
@@ -78,8 +76,6 @@ class TransactionCard extends StatelessWidget {
               child: Container(
                 margin: EdgeInsets.only(top: 5),
                 padding: EdgeInsets.only(right: 10, top: 5, bottom: 5),
-                // height: size.height * 0.083,
-                // color: Colors.blue,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,

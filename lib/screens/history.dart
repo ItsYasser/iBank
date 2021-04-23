@@ -8,8 +8,8 @@ import 'package:responsive_flutter/responsive_flutter.dart';
 import '../Widgets/DateCard.dart';
 
 class History extends StatefulWidget {
-  final List<Transaction> myListOfTransactions;
-  History({this.myListOfTransactions});
+  final List<Transaction> transactions;
+  History({this.transactions});
 
   @override
   _HistoryState createState() => _HistoryState();
@@ -17,19 +17,19 @@ class History extends StatefulWidget {
 
 class _HistoryState extends State<History> {
   int _index;
-  List<Transaction> _newList = [];
+  List<Transaction> _listOfTransactions = [];
   @override
   void initState() {
     super.initState();
-    showListofTransactions(DateTime.now());
+    getListOfTransactions(DateTime.now());
     _index = DateTime.now().day;
   }
 
-  void showListofTransactions(DateTime date) {
-    _newList.clear();
-    for (Transaction tx in widget.myListOfTransactions) {
+  void getListOfTransactions(DateTime date) {
+    _listOfTransactions.clear();
+    for (Transaction tx in widget.transactions) {
       if (tx.date.day == date.day) {
-        _newList.add(tx);
+        _listOfTransactions.add(tx);
       }
     }
     setState(() {
@@ -37,13 +37,13 @@ class _HistoryState extends State<History> {
     });
   }
 
-  List<DateCard> showListofDates() {
+  List<DateCard> getListofDateCards() {
     List<DateCard> newList = [];
-    for (int i = 0; i <= kNumDays; i++) {
+    for (int i = 0; i < kNumDays; i++) {
       DateTime date = DateTime.now().subtract(Duration(days: i));
       newList.add(DateCard(
         date: date,
-        function: showListofTransactions,
+        function: getListOfTransactions,
         index: _index,
       ));
     }
@@ -80,10 +80,10 @@ class _HistoryState extends State<History> {
           Container(
             height: realHeight * 0.17,
             child: ListView.builder(
-                itemCount: showListofDates().length,
+                itemCount: getListofDateCards().length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  var list = showListofDates();
+                  var list = getListofDateCards();
                   return list[index];
                 }),
           ),
@@ -91,7 +91,7 @@ class _HistoryState extends State<History> {
             height: realHeight * 0.05,
           ),
           LastTseeAll(
-            transactions: _newList,
+            transactions: _listOfTransactions,
           ),
           SizedBox(
             height: realHeight * 0.02,
@@ -105,11 +105,15 @@ class _HistoryState extends State<History> {
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: _newList.length <= 2
+                  mainAxisAlignment: _listOfTransactions.length <= 2
                       ? MainAxisAlignment.start
                       : MainAxisAlignment.spaceEvenly,
-                  children: _newList
-                      .getRange(0, _newList.length < 3 ? _newList.length : 3)
+                  children: _listOfTransactions
+                      .getRange(
+                          0,
+                          _listOfTransactions.length < 3
+                              ? _listOfTransactions.length
+                              : 3)
                       .map((tx) {
                     return TransactionCard(
                       amount: tx.amount,
