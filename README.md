@@ -15,12 +15,11 @@ A simple expenses (transactions) app made with dart(flutter) that helps you orga
 
   HomePage                 |   AddTransactionPage      |  AddIncomePage
 :-------------------------:|:-------------------------:|:-------------------------:
-![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/Home.gif?raw=true)|![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/HistoryGif.gif?raw=true)|![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/IncomeGif.gif?raw=true)
+![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/Home.gif?raw=true)|![](https://github.com/El-Mysto/personal_expenses/blob/master/ScreenshotsAddTransaction.png?raw=true)|![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/IncomeGif.gif?raw=true)
 
   HistoryPage              |   ChartPage               |  ProfilePage
 :-------------------------:|:-------------------------:|:-------------------------:
-![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/HistoryGif.gif?raw=true)|![]
-(https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/Chart.gif?raw=true)|![](https://github.com/TheAlphamerc/flutter_ecommerce_app/blob/master/screenshots/Profile.png?raw=true)
+![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/HistoryGif.gif?raw=true)|![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/Chart.gif?raw=true)|![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/Profile.png?raw=true)
 
 ## Some improuvements to the app 
 - The App doesn't have a database 
