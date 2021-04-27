@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 class OneCurve extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    // TODO: implement getClip
     var path = Path();
 
     path.lineTo(0.0, size.height - 50);
@@ -18,7 +17,6 @@ class OneCurve extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
     return true;
   }
 }

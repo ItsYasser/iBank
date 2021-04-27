@@ -37,7 +37,6 @@ class CircleChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 150,
-      // color: Colors.red,
       child: Row(
         children: [
           Expanded(
@@ -61,7 +60,6 @@ class CircleChart extends StatelessWidget {
             width: 15,
           ),
           Column(
-            // mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: myList.map((e) {

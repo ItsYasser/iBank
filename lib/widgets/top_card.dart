@@ -123,7 +123,6 @@ class TopHalf extends StatelessWidget {
                     offset: Offset(0, 3),
                   ),
                 ]),
-            // width: 50,
           ),
         )
       ],

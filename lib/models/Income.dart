@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 class Income {
   final String id;
   final double amount;

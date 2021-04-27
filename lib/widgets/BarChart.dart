@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:personal_expenses_2/constants.dart';

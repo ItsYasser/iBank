@@ -84,13 +84,6 @@ class Profile extends StatelessWidget {
             Divider(
               thickness: 1.5,
             ),
-            // Row(
-            //   children: [
-            //     Icon(Icons.person),
-            //     Text("Account"),
-            //     Icon(Icons.navigate_next),
-            //   ],
-            // ),
             Column(
               children: [
                 ListTileProp(
@@ -172,31 +165,3 @@ class ListTileProp extends StatelessWidget {
     );
   }
 }
-// Stack(
-//         children: [
-//           Positioned(
-//             top: 100,
-//             left: 0,
-//             child: Container(
-//               height: realHeight,
-//               width: realWidth,
-//               decoration: BoxDecoration(
-//                 color: Colors.white,
-//                 borderRadius: BorderRadius.circular(25),
-//               ),
-//             ),
-//           ),
-//           Positioned(
-//             top: 50,
-//             left: realWidth / 2.5,
-//             child: Container(
-//               height: 100,
-//               width: 100,
-//               decoration: BoxDecoration(
-//                 color: Colors.red,
-//                 borderRadius: BorderRadius.circular(30),
-//               ),
-//             ),
-//           )
-//         ],
-//       ),

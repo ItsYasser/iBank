@@ -6,7 +6,6 @@ class MyCustomClipper3 extends CustomClipper<Path> {
   MyCustomClipper3({this.radius});
   @override
   Path getClip(Size size) {
-    // int holeRadius = 25;
     final path = Path()
       ..moveTo(0, 0)
       ..lineTo((size.width / 2) - radius, 0.0)

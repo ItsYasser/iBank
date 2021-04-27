@@ -17,7 +17,6 @@ class TwoCurves extends CustomClipper<Path> {
     path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
         secondEndPoint.dx, secondEndPoint.dy);
 
-    // path.lineTo(size.width, size.height - 40);
     path.lineTo(size.width, 0.0);
     path.close();
 
@@ -26,7 +25,6 @@ class TwoCurves extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
     return false;
   }
 }

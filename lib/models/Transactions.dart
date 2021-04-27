@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 class Transaction {
   final String id;
   final String title;
