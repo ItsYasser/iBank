@@ -17,9 +17,12 @@ A simple expenses (transactions) app made with dart(flutter) that helps you orga
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/Home.gif?raw=true)|![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/AddTransaction.png?raw=true)|![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/IncomeGif.gif?raw=true)
 
+
+
   HistoryPage              |   ChartPage               |  ProfilePage
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/HistoryGif.gif?raw=true)|![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/Chart.gif?raw=true)|![](https://github.com/El-Mysto/personal_expenses/blob/master/Screenshots/Profile.png?raw=true)
+
 
 ## Some improuvements to the app 
 - The App doesn't have a database 
@@ -27,6 +30,7 @@ A simple expenses (transactions) app made with dart(flutter) that helps you orga
 - Setting profiles by adding authentification (database)
 - The code could be improved using state management
 - Animations are missing 
+
 
 
 ## Design inspiration 
