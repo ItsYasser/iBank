@@ -29,7 +29,7 @@ A simple expenses (transactions) app made with dart(flutter) that helps you orga
 - It Could be more responsive 
 - Setting profiles by adding authentification (database)
 - The code could be improved using state management
-- Animations are missing 
+- Add Animations 
 
 
 
